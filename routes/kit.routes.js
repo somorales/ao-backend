@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const Kit = require("../models/Kit.model");
-
+const {verifyToken, verifyAdmin} = require("../middlewares/auth.middlewares")
 
 
 //   post crear un kit 
 
-router.post("/", async (req, res, next) => {
+router.post("/",verifyToken, verifyAdmin, async (req, res, next) => {
     try {
       const response = await Kit.create({
         name: req.body.name,

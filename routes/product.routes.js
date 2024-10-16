@@ -52,18 +52,6 @@ router.put("/:id", async (req, res,next) => {
     }
   });
 
-//   eliminar un producto
-router.delete("/:id", async (req, res, next) => {
-    try {
-      const response = await Product.findByIdAndDelete(req.params.id);
-  
-      res.status(204).send();
-    } catch (error) {
-      console.log(error);
-      next (error);
-    }
-  });
-
 //   get leer un producto
 
 router.get("/:id", async (req, res,next) => {
