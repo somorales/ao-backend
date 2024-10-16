@@ -1,9 +1,16 @@
 const router = require("express").Router();
 
-const Product = require("../models/Product.model");
-const Kit = require("../models/Kit.model");
-const Payment = require("../models/Payment.model");
-const User = require("../models/User.model");
+
+
+
+//ruta de productos
+const productRouter = require("./product.routes.js")
+router.use("/products", productRouter)
+
+// ruta de kit 
+const kitRouter = require("./kit.routes.js")
+router.use("/kits", kitRouter)
+
 
 router.get("/", (req, res, next) => {
   res.json("All good in here");
