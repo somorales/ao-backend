@@ -1,8 +1,6 @@
 const router = require("express").Router();
 
 
-
-
 //ruta de productos
 const productRouter = require("./product.routes.js")
 router.use("/products", productRouter)

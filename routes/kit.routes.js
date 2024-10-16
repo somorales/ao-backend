@@ -40,7 +40,7 @@ router.post("/",verifyToken, verifyAdmin, async (req, res, next) => {
   
   
   //   put editar un kit
-  router.put("/:id", async (req, res,next) => {
+  router.put("/:id",verifyToken, verifyAdmin, async (req, res,next) => {
       try {
         const updateKit = await Kit.findByIdAndUpdate(req.params.id, req.body, {
           new: true,
@@ -54,7 +54,7 @@ router.post("/",verifyToken, verifyAdmin, async (req, res, next) => {
     });
   
   //   eliminar un kit
-  router.delete("/:id", async (req, res, next) => {
+  router.delete("/:id",verifyToken, verifyAdmin, async (req, res, next) => {
       try {
         const response = await Kit.findByIdAndDelete(req.params.id);
     
@@ -78,7 +78,7 @@ router.post("/",verifyToken, verifyAdmin, async (req, res, next) => {
     });
 
  // ver los detalles de los productos que tiene cada kit
- router.get("/:id/details", async (req, res,next) => {
+ router.get("/:id/details",verifyToken, verifyAdmin,async (req, res,next) => {
     try {
       const kit = await Kit.findById(req.params.id).populate("products");
       res.status(200).json(kit);

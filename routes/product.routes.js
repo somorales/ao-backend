@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const Product = require("../models/Product.model");
+const {verifyToken, verifyAdmin} = require("../middlewares/auth.middlewares")
 
 //   post crear un producto
 
-router.post("/", async (req, res, next) => {
+router.post("/",verifyToken, verifyAdmin, async (req, res, next) => {
   try {
     const response = await Product.create({
       name: req.body.name,
@@ -39,7 +40,7 @@ router.get("/", async (req, res,next) => {
 
 
 //   put editar un producto
-router.put("/:id", async (req, res,next) => {
+router.put("/:id",verifyToken, verifyAdmin, async (req, res,next) => {
     try {
       const updateProduct = await Product.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
