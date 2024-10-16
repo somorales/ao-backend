@@ -20,12 +20,10 @@ router.post("/signup", async (req, res, next) => {
   // 2. la contraseña deberia ser lo suficientemente fuerte
   const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,16}$/gm;
   if (!regexPassword.test(password)) {
-    res
-      .status(400)
-      .json({
-        message:
-          "La contraseña debe tener al menos, una mayuscula, una minuscula, un numero y entre 8 y 16 caracteres",
-      });
+    res.status(400).json({
+      message:
+        "La contraseña debe tener al menos, una mayuscula, una minuscula, un numero y entre 8 y 16 caracteres",
+    });
     return;
   }
 
@@ -102,7 +100,9 @@ router.get("/verify", verifyToken, (req, res) => {
 // ejemplo de una llamada privada como /user/mi-perfil
 router.get("/user/basket", verifyToken, async (req, res) => {
   try {
-    const user = await User.findById(req.payload._id).populate("basket");
+    const user = await User.findById(req.payload._id)
+      .populate("basket.kits")
+      .populate("basket.products");
     res.status(200).json(user.basket);
   } catch (error) {
     console.log(error);
@@ -112,8 +112,8 @@ router.get("/user/basket", verifyToken, async (req, res) => {
 
 router.get("/user/profile", verifyToken, async (req, res) => {
   try {
-    const user = await User.findById(req.payload._id).populate("basket");
-    
+    const user = await User.findById(req.payload._id);
+
     const publicProfile = {
       name: user.name,
       email: user.email,

@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const Product = require("../models/Product.model");
-const {verifyToken, verifyAdmin} = require("../middlewares/auth.middlewares")
+const { verifyToken, verifyAdmin } = require("../middlewares/auth.middlewares");
 
 //   post crear un producto
 
-router.post("/",verifyToken, verifyAdmin, async (req, res, next) => {
+router.post("/", verifyToken, verifyAdmin, async (req, res, next) => {
   try {
     const response = await Product.create({
       name: req.body.name,
@@ -18,7 +18,6 @@ router.post("/",verifyToken, verifyAdmin, async (req, res, next) => {
     });
 
     res.status(201).json(response);
-
   } catch (error) {
     console.log(error);
     next(error);
@@ -27,42 +26,53 @@ router.post("/",verifyToken, verifyAdmin, async (req, res, next) => {
 
 //   get  leer productos
 
-router.get("/", async (req, res,next) => {
-    try {
-      const allProduct = await Product.find();
-  
-      res.status(200).json(allProduct);
-    } catch (error) {
-      console.log(error);
-      next(error);
-    }
-  });
+router.get("/", async (req, res, next) => {
+  try {
+    let filtros;
 
+    if (req.query.name === undefined) {
+      filtros = {};
+    } else {
+      filtros = { name: { $regex: req.query.name, $options: "i" } };
+    }
+
+    const allProduct = await Product.find(filtros);
+
+    res.status(200).json(allProduct);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+});
 
 //   put editar un producto
-router.put("/:id",verifyToken, verifyAdmin, async (req, res,next) => {
-    try {
-      const updateProduct = await Product.findByIdAndUpdate(req.params.id, req.body, {
+router.put("/:id", verifyToken, verifyAdmin, async (req, res, next) => {
+  try {
+    const updateProduct = await Product.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
         new: true,
-      });
-  
-      res.status(200).json(updateProduct);
-    } catch (error) {
-      console.log(error);
-      next(error);
-    }
-  });
+      }
+    );
+
+    res.status(200).json(updateProduct);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+});
 
 //   get leer un producto
 
-router.get("/:id", async (req, res,next) => {
-    try {
-      const product = await Product.findById(req.params.id);
-      res.status(200).json(product);
-    } catch (error) {
-      console.log(error);
-      next(error);
-    }
-  });
+router.get("/:id", async (req, res, next) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    res.status(200).json(product);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+});
 
 module.exports = router;
