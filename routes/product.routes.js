@@ -9,6 +9,7 @@ router.post("/", verifyToken, verifyAdmin, async (req, res, next) => {
   try {
     const response = await Product.create({
       name: req.body.name,
+      category: req.body.category,
       description: req.body.description,
       image: req.body.image,
       price: req.body.price,
