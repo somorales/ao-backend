@@ -1,5 +1,9 @@
 const router = require("express").Router();
 
+//ruta de subir imagen
+const uploadRoutes = require("./upload.routes");
+router.use("/upload", uploadRoutes);
+
 //ruta de productos
 const productRouter = require("./product.routes.js");
 router.use("/products", productRouter);
