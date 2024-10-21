@@ -110,6 +110,18 @@ router.get("/user/basket", verifyToken, async (req, res) => {
   }
 });
 
+router.get("/user/favorites", verifyToken, async (req, res) => {
+  try {
+    const user = await User.findById(req.payload._id)
+      .populate("favorites.kits")
+      .populate("favorites.products");
+    res.status(200).json(user.favorites);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+});
+
 router.get("/user/profile", verifyToken, async (req, res) => {
   try {
     const user = await User.findById(req.payload._id);

@@ -28,6 +28,11 @@ const userSchema = new Schema(
       products: [{ type: Schema.Types.ObjectId, ref: "Product" }],
       kits: [{ type: Schema.Types.ObjectId, ref: "Kit" }],
     },
+
+    favorites: {
+      products: [{ type: Schema.Types.ObjectId, ref: "Product" }],
+      kits: [{ type: Schema.Types.ObjectId, ref: "Kit" }],
+    }
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

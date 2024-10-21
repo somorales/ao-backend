@@ -1,5 +1,9 @@
 const router = require("express").Router();
 
+// ruta user
+const favoriteRouter = require("./favorite.routes");
+router.use("/favorites", favoriteRouter);
+
 //ruta de subir imagen
 const uploadRoutes = require("./upload.routes");
 router.use("/upload", uploadRoutes);
