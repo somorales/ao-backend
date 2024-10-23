@@ -22,7 +22,7 @@ router.post("/signup", async (req, res, next) => {
   if (!regexPassword.test(password)) {
     res.status(400).json({
       message:
-        "La contraseña debe tener al menos, una mayuscula, una minuscula, un numero y entre 8 y 16 caracteres",
+      "Por favor, asegúrate de que tu contraseña tenga entre 8 y 16 caracteres, incluyendo al menos una letra mayúscula, una letra minúscula y un número."
     });
     return;
   }
@@ -30,7 +30,7 @@ router.post("/signup", async (req, res, next) => {
   try {
     const foundUser = await User.findOne({ email: email });
     if (foundUser) {
-      res.status(400).json({ message: "Usuario ya registrado con ese email" });
+      res.status(400).json({ message: "Este correo electrónico ya está registrado. Por favor, utiliza otro o inicia sesión." });
       return;
     }
 
@@ -55,7 +55,7 @@ router.post("/login", async (req, res, next) => {
   console.log(email, password);
 
   if (!email || !password) {
-    res.status(400).json({ message: "Todos los campos son requeridos" });
+    res.status(400).json({ message: "Todos los campos son necesarios. Asegúrate de no dejar ninguno en blanco." });
     return;
   }
 
@@ -63,7 +63,7 @@ router.post("/login", async (req, res, next) => {
     const foundUser = await User.findOne({ email: email });
     console.log(foundUser);
     if (!foundUser) {
-      res.status(400).json({ message: "Usuario no encontrado con ese email" });
+      res.status(400).json({ message: "No se encontró ninguna cuenta con este correo electrónico." });
       return;
     }
 
@@ -72,7 +72,7 @@ router.post("/login", async (req, res, next) => {
       foundUser.password
     );
     if (!isPasswordCorrect) {
-      res.status(400).json({ message: "Contraseña no es correcta" });
+      res.status(400).json({ message: "Contraseña incorrecta. Por favor, inténtalo de nuevo." });
       return;
     }
 
