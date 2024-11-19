@@ -11,10 +11,10 @@ router.post("/signup", async (req, res, next) => {
   console.log(req.body);
   const { email, password, name } = req.body;
 
-  // 1. Los campos son obligatorios
+
   if (!email || !password || !name) {
     res.status(400).json({ message: "Todos los campos son requeridos" });
-    return; // esto detiene la funcion. Actuando como clausula de guardia.
+    return; 
   }
 
   // 2. la contraseña deberia ser lo suficientemente fuerte

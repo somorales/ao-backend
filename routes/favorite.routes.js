@@ -3,9 +3,7 @@ const router = express.Router();
 const User = require("../models/User.model");
 const { verifyToken } = require("../middlewares/auth.middlewares");
 
-// body del frontend
-// {productId: ...}
-// {kitId: ...}
+
 
 router.post("/", verifyToken, async (req, res) => {
   try {
