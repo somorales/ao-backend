@@ -1,4 +1,4 @@
-# Project Name
+# AOpy
 
 This is the backend project for the [AOpy app](https://ao-py.netlify.app/).
 
@@ -118,28 +118,23 @@ Kit model
 }
 ```
 
-
 ## API Endpoints (backend routes)
 
-
-| HTTP Method | URL                     | Request Body                                    | Success Status | Error Status | Description                                   |
-|-------------|-------------------------|------------------------------------------------|----------------|--------------|-----------------------------------------------|
-| GET         | `/kits`                 |                                                | 200            | 400          | Returns an array with all available kits.     |
-| GET         | `/kits/:id`             |                                                | 200            | 404          | Returns details of a specific kit.            |
-| GET         | `/kits/:id/details`     |                                                | 200            | 404          | Returns a kit along with its product details. |
-| DELETE      | `/kits/:id`             |                                                | 200            | 404          | Deletes a kit by its ID.                      |
-| POST        | `/kits`                 | { name, description, image, price, quantity, products } | 201            | 400          | Creates a new kit.                            |
-| PUT         | `/kits`                 | { name, description, image, price, quantity, products } | 200            | 400          | Updates an existing kit.                      |
-| GET         | `/products`             |                                                | 200            | 400          | Returns an array with all available products. |
-| GET         | `/products/:id`         |                                                | 200            | 404          | Returns details of a specific product.        |
-| DELETE      | `/products/:id`         |                                                | 200            | 404          | Deletes a product by its ID.                  |
-| POST        | `/products`             | { name, description, image, price, quantity, size, color } | 201            | 400          | Creates a new product.                        |
-| PUT         | `/products/:id`         | { name, description, image, price, quantity, size, color } | 200            | 400          | Updates an existing product.                  |
-
-
+| HTTP Method | URL                 | Request Body                                               | Success Status | Error Status | Description                                   |
+| ----------- | ------------------- | ---------------------------------------------------------- | -------------- | ------------ | --------------------------------------------- |
+| GET         | `/kits`             |                                                            | 200            | 400          | Returns an array with all available kits.     |
+| GET         | `/kits/:id`         |                                                            | 200            | 404          | Returns details of a specific kit.            |
+| GET         | `/kits/:id/details` |                                                            | 200            | 404          | Returns a kit along with its product details. |
+| DELETE      | `/kits/:id`         |                                                            | 200            | 404          | Deletes a kit by its ID.                      |
+| POST        | `/kits`             | { name, description, image, price, quantity, products }    | 201            | 400          | Creates a new kit.                            |
+| PUT         | `/kits`             | { name, description, image, price, quantity, products }    | 200            | 400          | Updates an existing kit.                      |
+| GET         | `/products`         |                                                            | 200            | 400          | Returns an array with all available products. |
+| GET         | `/products/:id`     |                                                            | 200            | 404          | Returns details of a specific product.        |
+| DELETE      | `/products/:id`     |                                                            | 200            | 404          | Deletes a product by its ID.                  |
+| POST        | `/products`         | { name, description, image, price, quantity, size, color } | 201            | 400          | Creates a new product.                        |
+| PUT         | `/products/:id`     | { name, description, image, price, quantity, size, color } | 200            | 400          | Updates an existing product.                  |
 
 ## Links
-
 
 ### Project
 
@@ -154,4 +149,5 @@ Kit model
 [Model Planning Link](https://www.figma.com/design/kY44d1N2H39t7OH9vyGksz/AOPY?node-id=0-1&t=tHlnQvChYWUkUYn0-1)
 
 ### Slides
+
 [Slides Link](https://www.figma.com/design/fHX6sMQJantPEe3rtz3lXV/Ao?node-id=0-1&t=TKpestibuvMdKwTW-1)
